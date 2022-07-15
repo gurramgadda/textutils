@@ -1,0 +1,61 @@
+import React, { useState } from "react";
+
+export default function TextForm(props) {
+  const [text, setText] = useState("Enter Text Here");
+  //Use setText function to change the state
+  const handleUpClick = () => {
+    let newText = text.toUpperCase();
+    setText(newText);
+    props.showAlert("Converted To UpperCase","success");
+  };
+  const handleOnChange = (event) => {
+    setText(event.target.value);
+  };
+  const handleLoClick = () => {
+    let newText = text.toLowerCase();
+    setText(newText);
+    props.showAlert("Converted To LowerCase","success");
+  };
+  const handleClearClick = () => {
+    let newText = "";
+    setText(newText);
+    props.showAlert("Cleared the Text","success");
+  };
+  return (
+    <>
+      <div className="container">
+        <h3>{props.heading}</h3>
+        <div className="mb-3">
+          <textarea
+            className="form-control"
+            value={text}
+            onChange={handleOnChange}
+            id="exampleFormControlTextarea1"
+            rows="8"
+            style = {{backgroundColor : props.mode === 'dark'? 'lightgrey':'white'}}
+          ></textarea>
+        </div>
+        <button className="btn btn-primary mx-2" onClick={handleUpClick}>
+          Convert to UpperCase
+        </button>
+        <button className="btn btn-primary mx-2" onClick={handleLoClick}>
+          Convert to LowerCase
+        </button>
+        <button className="btn btn-primary mx-2" onClick={handleClearClick}>
+          Clear Text
+        </button>
+      </div>
+      <div className="container my-3" mode = {props.mode} >
+        <h3>Your text summary</h3>
+        <p>
+          {text.split(" ").length} words {text.length} characters
+        </p>
+        <p>{0.008 * text.split(" ").length} Minutes Read</p>
+        <div className="container my-3">
+          <h3>Preview</h3>
+          <p>{text.length >0 ? text:"Enter text in the above box to preview here"}</p>
+        </div>
+      </div>
+    </>
+  );
+}
