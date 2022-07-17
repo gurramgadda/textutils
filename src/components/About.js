@@ -1,32 +1,37 @@
-import React,{useState} from "react";
+import React from "react";
 
 export default function About(props) {
-    const [MyStyle, setMyStyle] = useState({
-        color: 'black',
-        backgroundColor: 'white'
-    })
-    const [MyText, setMyText] = useState('Enable Dark Mode')
-    const ChangeMode = ()=>{
-        if(MyStyle.color === 'white'){
-            setMyStyle({
-                color: 'black',
-                backgroundColor : 'white'
-            })
-            setMyText('Enable Dark Mode')
-        }
-        else{
-            setMyStyle({
-                color: 'white',
-                backgroundColor: 'black',
-                border : "0.5px solid white"
-            })
-            setMyText('Disable Dark Mode')
-        }
-    }
+    // const [MyStyle, setMyStyle] = useState({
+    //     color: 'black',
+    //     backgroundColor: 'white'
+    // })
+    // const [MyText, setMyText] = useState('Enable Dark Mode')
+    // const ChangeMode = ()=>{
+    //     if(MyStyle.color === 'white'){
+    //         setMyStyle({
+    //             color: 'black',
+    //             backgroundColor : 'white'
+    //         })
+    //         setMyText('Enable Dark Mode')
+    //     }
+    //     else{
+    //         setMyStyle({
+    //             color: 'white',
+    //             backgroundColor: 'black',
+    //             border : "0.5px solid white"
+    //         })
+    //         setMyText('Disable Dark Mode')
+    //     }
+    let MyStyle = {
+      color : props.mode ==='dark' ? 'white' : 'black',
+      backgroundColor : props.mode ==='dark' ? '#0e0b0b' : 'white' ,
+      border : '1px solid',
+      borderColor : props.mode ==='dark' ? 'white' : 'black'
+    } 
   return (
     <>
-    <div style = {MyStyle} className="ew" >
-        <h1 className="my-3">About Us</h1>
+    <div className="container" >
+        <h1 className="my-3" style = {{color : props.mode ==='dark' ? 'white' : 'black'}}>About Us</h1>
       <div className="accordion p-2"  id="accordionExample" mode = {props.mode}>
         <div className="accordion-item">
           <h2 className="accordion-header" id="headingOne">
@@ -60,7 +65,7 @@ export default function About(props) {
             </div>
           </div>
         </div>
-        <div className="accordion-item" style={MyStyle}>
+        <div className="accordion-item" >
           <h2 className="accordion-header" id="headingTwo">
             <button
               className="accordion-button collapsed"
@@ -92,7 +97,7 @@ export default function About(props) {
             </div>
           </div>
         </div>
-        <div className="accordion-item" style={MyStyle}>
+        <div className="accordion-item" >
           <h2 className="accordion-header" id="headingThree">
             <button
               className="accordion-button collapsed"
@@ -126,9 +131,9 @@ export default function About(props) {
         </div>
       </div>
     </div>
-    <div className="my-3">
+    {/* <div className="my-3">
         <button className="btn btn-primary" onClick={ChangeMode} >{MyText}</button>
-    </div>
+    </div> */}
     </>
   );
 }

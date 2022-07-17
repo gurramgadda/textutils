@@ -3,8 +3,8 @@ import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import React, {useState} from 'react';
 import Alerts from "./components/Alerts";
-// import About from "./components/About";
-// import {BrowserRouter as Router, Routes, Route,Link} from "react-router-dom"
+import About from "./components/About";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -40,19 +40,19 @@ function App() {
 
   return (
     <>
-    {/* <Router> */}
+    <Router>
       <Navbar Title = "TextUtils"  aboutText = "About TextUtils" mode = {mode} ToggleMode = {ToggleMode} />
       <Alerts alert={alert}/>
       <div className="container my-3 ">
-        {/* <Routes>
+        <Routes>
           <Route exact path='/' element={<TextForm heading="Welcome to TextUtils you can Convert your Text here" mode = {mode} showAlert={showAlert} />}>
           </Route>
           <Route exact path='/about' element={<About mode = {mode}/>}>
           </Route>
-        </Routes> */}
-        <TextForm heading="Welcome to TextUtils you can Convert your Text here" mode = {mode} showAlert={showAlert} />
+        </Routes>
+        {/* <TextForm heading="Welcome to TextUtils you can Convert your Text here" mode = {mode} showAlert={showAlert} /> */}
       </div>
-    {/* </Router> */}
+    </Router>
     </>
   );
 }
