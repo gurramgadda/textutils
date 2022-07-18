@@ -1,7 +1,8 @@
+import { getByPlaceholderText } from "@testing-library/react";
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-  const [text, setText] = useState("Enter Text Here");
+  const [text, setText] = useState("");
   //Use setText function to change the state
   const handleUpClick = () => {
     let newText = text.toUpperCase();
@@ -22,10 +23,7 @@ export default function TextForm(props) {
     props.showAlert("Cleared the Text","success");
   };
   const handleCopyText =()=>{
-    console.log('Text Copied');
-    var text = document.getElementById("TextBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    navigator.clipboard.writeText(text);
     props.showAlert("Copied to Clipboard","success")
   };
   const handleExtraSpaces = ()=>{
@@ -44,31 +42,31 @@ export default function TextForm(props) {
             onChange={handleOnChange}
             id="TextBox"
             rows="8"
-            style = {{backgroundColor : props.mode === 'dark'? 'lightgrey':'white'}}
+            style = {{backgroundColor : props.mode === 'dark'? 'lightgrey':'white' ,resize : 'none'}}
           ></textarea>
         </div>
-        <button disabled={text.split(" ").filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
+        <button disabled={text.split(/\s+/).filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
           Convert to UpperCase
         </button>
-        <button disabled={text.split(" ").filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleLoClick}>
+        <button disabled={text.split(/\s+/).filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleLoClick}>
           Convert to LowerCase
         </button>
-        <button disabled={text.split(" ").filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleExtraSpaces}>
+        <button disabled={text.split(/\s+/).filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleExtraSpaces}>
           Remove Extra Spaces
         </button>
-        <button disabled={text.split(" ").filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleCopyText}>
+        <button disabled={text.split(/\s+/).filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleCopyText}>
           Copy Text
         </button>
-        <button disabled={text.split(" ").filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleClearClick}>
+        <button disabled={text.split(/\s+/).filter((element)=>{return element != 0}).length===0} className="btn btn-primary mx-2 my-2" onClick={handleClearClick}>
           Clear Text
         </button>
       </div>
       <div className="container my-3" mode = {props.mode} >
         <h3>Your text summary</h3>
         <p>
-          {text.split(" ").filter((element)=>{return element != 0}).length} words {text.length} characters
+          {text.split(/\s+/).filter((element)=>{return element != 0}).length} words {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").filter((element)=>{return element != 0}).length} Minutes Read</p>
+        <p>{0.008 * text.split(/\s+/).filter((element)=>{return element != 0}).length} Minutes Read</p>
         <div className="container my-3">
           <h3>Preview</h3>
           <p>{text.length >0 ? text:"Enter text in the above box to preview here"}</p>
