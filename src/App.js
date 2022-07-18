@@ -50,7 +50,6 @@ function App() {
           <Route exact path='/about' element={<About mode = {mode}/>}>
           </Route>
         </Routes>
-        {/* <TextForm heading="Welcome to TextUtils you can Convert your Text here" mode = {mode} showAlert={showAlert} /> */}
       </div>
     </Router>
     </>
