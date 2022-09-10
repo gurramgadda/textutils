@@ -38,6 +38,7 @@ export default function TextForm(props) {
         <div className="mb-3">
           <textarea
             className="form-control"
+            placeholder="Enter your Text"
             value={text}
             onChange={handleOnChange}
             id="TextBox"
